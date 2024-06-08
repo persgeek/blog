@@ -11,9 +11,7 @@ class CreateRequest extends BaseRequest
         return [
             'title' => ['required', 'string', 'max:255'],
 
-            'type' => ['required', 'string', 'max:255'],
-
-            'path' => ['required', 'image']
+            'path' => ['required', 'image', 'max:4096']
         ];
     }
 }

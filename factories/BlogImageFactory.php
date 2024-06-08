@@ -3,6 +3,7 @@
 namespace PG\Blog\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Http\UploadedFile;
 use PG\Blog\Models\BlogImage;
 
 class BlogImageFactory extends Factory
@@ -12,11 +13,9 @@ class BlogImageFactory extends Factory
     public function definition()
     {
         return [
-            'title' => 'Coffe',
+            'title' => $this->faker->title(),
 
-            'type' => 'image',
-
-            'path' => 'coffe.png'
+            'path' => UploadedFile::fake()->image('coffe.png')
         ];
     }
 }

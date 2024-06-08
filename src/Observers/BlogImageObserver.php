@@ -4,15 +4,11 @@ namespace PG\Blog\Observers;
 
 class BlogImageObserver
 {
-    public function saving($model)
+    public function creating($model)
     {
-        $path = $model->getOriginal('path');
+        $fileUpload = $model->getAttribute('path');
 
-        $fileUpload = request()->file('path');
-
-        if ($fileUpload) {
-            $path = $fileUpload->store('images');
-        }
+        $path = $fileUpload->store('images');
 
         $model->path = $path;
     }

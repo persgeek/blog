@@ -13,8 +13,6 @@ class ImageResource extends BaseResource
 
             'title' => $this->title,
 
-            'type' => $this->type,
-
             'path' => $this->path,
 
             'created_at' => $this->created_at,

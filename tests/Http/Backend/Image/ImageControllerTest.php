@@ -21,7 +21,7 @@ class ImageControllerTest extends TestCase
 
         $this->actingAs($user);
 
-        BlogImage::factory()->createQuietly();
+        BlogImage::factory()->create();
 
         $this->getJson('/blog/backend/images')
             ->assertSuccessful();
@@ -33,7 +33,7 @@ class ImageControllerTest extends TestCase
 
         $this->actingAs($user);
 
-        BlogImage::factory()->createQuietly();
+        BlogImage::factory()->create();
 
         $this->getJson('/blog/backend/images/1/show')
             ->assertSuccessful();
@@ -47,10 +47,6 @@ class ImageControllerTest extends TestCase
 
         $params = BlogImage::factory()->make()
             ->toArray();
-
-        $path = UploadedFile::fake()->image('coffe.png');
-
-        $params['path'] = $path;
 
         $this->postJson('/blog/backend/images/create', $params)
             ->assertSuccessful();
