@@ -6,6 +6,7 @@ use PG\Blog\Http\Backend\Article\Resources\ArticleResource;
 use PG\Blog\Http\Backend\Article\Requests\CategoryRequest;
 use PG\Blog\Http\Backend\Article\Requests\CreateRequest;
 use PG\Blog\Http\Backend\Article\Requests\UpdateRequest;
+use PG\Blog\Http\Backend\Article\Requests\ImageRequest;
 use PG\Blog\Http\Controllers\BaseController;
 use PG\Blog\Models\BlogArticle;
 
@@ -71,6 +72,20 @@ class ArticleController extends BaseController
 
         $article->categories()
             ->sync($request->categories);
+
+        return ArticleResource::make($article);
+    }
+
+    public function image($article, ImageRequest $request)
+    {
+        $article = BlogArticle::find($article);
+
+        if (!$article) {
+            $this->raiseNothing();
+        }
+
+        $article->images()
+            ->sync($request->images);
 
         return ArticleResource::make($article);
     }

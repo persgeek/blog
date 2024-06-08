@@ -57,6 +57,8 @@ Route::namespace('PG\\Blog\\Http')->prefix('blog')->group(function() {
                 Route::post('update', 'ArticleController@update');
 
                 Route::post('category', 'ArticleController@category');
+
+                Route::post('image', 'ArticleController@image');
             });
         });
 
