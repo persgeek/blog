@@ -57,5 +57,19 @@ Route::namespace('PG\\Blog\\Http')->prefix('blog')->group(function() {
                 Route::post('update', 'ArticleController@update');
             });
         });
+
+        Route::namespace('Category')->group(function() {
+
+            Route::get('categories', 'CategoryController@index');
+
+            Route::post('categories/create', 'CategoryController@create');
+
+            Route::prefix('categories/{category}')->group(function() {
+
+                Route::get('show', 'CategoryController@show');
+
+                Route::post('update', 'CategoryController@update');
+            });
+        });
     });
 });

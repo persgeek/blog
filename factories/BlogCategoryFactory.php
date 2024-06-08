@@ -12,7 +12,9 @@ class BlogCategoryFactory extends Factory
     public function definition()
     {
         return [
-            'title' => 'Lorem Ipsum'
+            'title' => $this->faker->title(),
+
+            'slug' => $this->faker->unique()->slug()
         ];
     }
 }
