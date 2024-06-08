@@ -3,6 +3,7 @@
 namespace PG\Blog\Http\Backend\Article;
 
 use PG\Blog\Http\Backend\Article\Resources\ArticleResource;
+use PG\Blog\Http\Backend\Article\Requests\CategoryRequest;
 use PG\Blog\Http\Backend\Article\Requests\CreateRequest;
 use PG\Blog\Http\Backend\Article\Requests\UpdateRequest;
 use PG\Blog\Http\Controllers\BaseController;
@@ -56,6 +57,20 @@ class ArticleController extends BaseController
 
         $article->fill($data);
         $article->save();
+
+        return ArticleResource::make($article);
+    }
+
+    public function category($article, CategoryRequest $request)
+    {
+        $article = BlogArticle::find($article);
+
+        if (!$article) {
+            $this->raiseNothing();
+        }
+
+        $article->categories()
+            ->sync($request->categories);
 
         return ArticleResource::make($article);
     }

@@ -2,6 +2,7 @@
 
 namespace PG\Blog\Tests\Http\Backend\Article;
 
+use PG\Blog\Models\BlogCategory;
 use PG\Blog\Models\BlogArticle;
 use PG\Blog\Tests\Models\User;
 use PG\Blog\Tests\TestCase;
@@ -48,6 +49,24 @@ class ArticleControllerTest extends TestCase
             ->toArray();
 
         $this->postJson('/blog/backend/articles/create', $params)
+            ->assertSuccessful();
+    }
+
+    public function testCanAddCategoryToArticle()
+    {
+        $user = User::make();
+
+        $this->actingAs($user);
+
+        $category = BlogCategory::factory()
+            ->create();
+
+        $article = BlogArticle::factory()
+            ->create();
+
+        $params = ['categories' => [1]];
+
+        $this->postJson('/blog/backend/articles/1/category', $params)
             ->assertSuccessful();
     }
 }
