@@ -8,9 +8,11 @@ trait ReadTime
 {
     public function getReadTimeAttribute()
     {
-        $words = str_word_count($this->content);
+        $listOfWords = preg_split('/[\s]+/', strip_tags($this->content));
 
-        $seconds = ($words / 3.3);
+        $countOfWords = count($listOfWords);
+
+        $seconds = ($countOfWords / 3.3);
 
         return CarbonInterval::seconds($seconds)
             ->forHumans();
