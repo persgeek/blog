@@ -13,7 +13,9 @@ class CategoryResource extends BaseResource
 
             'title' => $this->title,
 
-            'slug' => $this->slug
+            'slug' => $this->slug,
+
+            'total' => $this->total
         ];
     }
 }

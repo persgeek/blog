@@ -10,4 +10,9 @@ class BlogCategory extends BaseModel
     {
         return $this->belongsToMany(BlogArticle::class);
     }
+
+    public function getTotalAttribute()
+    {
+        return $this->articles()->count();
+    }
 }
