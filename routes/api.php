@@ -28,9 +28,28 @@ Route::namespace('PG\\Blog\\Http')->prefix('blog')->group(function() {
                 Route::get('articles', 'CategoryController@articles');
             });
         });
+
+        Route::namespace('Common')->prefix('common')->group(function() {
+
+            Route::get('settings', 'CommonController@settings');
+        });
     });
 
     Route::namespace('Backend')->prefix('backend')->middleware(CanManageBlog::class)->group(function() {
+
+        Route::namespace('Setting')->group(function() {
+
+            Route::get('settings', 'SettingController@index');
+
+            Route::post('settings/create', 'SettingController@create');
+
+            Route::prefix('settings/{setting}')->group(function() {
+
+                Route::get('show', 'SettingController@show');
+
+                Route::post('update', 'SettingController@update');
+            });
+        });
 
         Route::namespace('Image')->group(function() {
 
