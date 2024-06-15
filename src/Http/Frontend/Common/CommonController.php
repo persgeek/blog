@@ -2,8 +2,10 @@
 
 namespace PG\Blog\Http\Frontend\Common;
 
+use PG\Blog\Http\Frontend\Common\Resources\SliderResource;
 use PG\Blog\Http\Controllers\BaseController;
 use PG\Blog\Models\BlogSetting;
+use PG\Blog\Models\BlogSlider;
 
 class CommonController extends BaseController
 {
@@ -18,5 +20,16 @@ class CommonController extends BaseController
         }
 
         return compact('data');
+    }
+
+    public function slider($slug)
+    {
+        $slider = BlogSlider::slugOrId($slug)->first();
+
+        if (!$slider) {
+            $this->raiseNothing();
+        }
+
+        return SliderResource::make($slider);
     }
 }

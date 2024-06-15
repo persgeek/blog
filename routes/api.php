@@ -31,6 +31,8 @@ Route::namespace('PG\\Blog\\Http')->prefix('blog')->group(function() {
 
         Route::namespace('Common')->prefix('common')->group(function() {
 
+            Route::get('slider/{slug}', 'CommonController@slider');
+
             Route::get('settings', 'CommonController@settings');
         });
     });
@@ -78,6 +80,22 @@ Route::namespace('PG\\Blog\\Http')->prefix('blog')->group(function() {
                 Route::post('category', 'ArticleController@category');
 
                 Route::post('image', 'ArticleController@image');
+            });
+        });
+
+        Route::namespace('Slider')->group(function() {
+
+            Route::get('sliders', 'SliderController@index');
+
+            Route::post('sliders/create', 'SliderController@create');
+
+            Route::prefix('sliders/{slider}')->group(function() {
+
+                Route::get('show', 'SliderController@show');
+
+                Route::post('update', 'SliderController@update');
+
+                Route::post('article', 'SliderController@article');
             });
         });
 
