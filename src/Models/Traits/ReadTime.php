@@ -15,6 +15,6 @@ trait ReadTime
         $seconds = ($countOfWords / 3.3);
 
         return CarbonInterval::seconds($seconds)
-            ->forHumans();
+            ->cascade()->forHumans();
     }
 }
